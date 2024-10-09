@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export { ArctirClient } from './ArctirClient';
+export { FlightdeckClient } from './FlightdeckClient';
 
 export { ApiError } from './core/ApiError';
 export { BaseHttpRequest } from './core/BaseHttpRequest';
