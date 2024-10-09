@@ -1,0 +1,41 @@
+{
+  "name": "@arctir/flightdeck-typescript",
+  "version": "0.0.0",
+  "description": "A Typescript library for interacting with the Flightdeck API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": "https://github.com/arctir/flightdeck-typescript",
+  "author": "Arctir",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "openapi-typescript-codegen": "^0.25.0",
+    "prebuild": "^13.0.1",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "lint": "eslint . --ext .ts",
+    "copyspecs": "mkdir -p ./spec && cp ./api/generated/v1/*.yaml ./spec",
+    "copyspecs:dev": "mkdir -p ./spec && cp ../api/generated/v1/*.yaml ./spec",
+    "prebuild": "yarn copyspecs",
+    "build": "openapi --input ./api/generated/v1/api.gen.yaml --output src/ -c axios --name FlightdeckClient",
+    "predev": "yarn copyspecs:dev",
+    "dev": "openapi --input ../api/generated/v1/api.gen.yaml --output src/ -c axios --name FlightdeckClient"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "camelcase": "^8.0.0",
+    "commonjs": "^0.0.1"
+  },
+  "files": [
+    "spec/**/*",
+    "dist"
+  ]
+}

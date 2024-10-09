@@ -1,0 +1,63 @@
+name: generate
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "the api tag"
+        required: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.ARCTIR_GH_ACTIONS_TOKEN }}
+  
+      - name: Update the api submodule
+        run: |
+          cd api;
+          git fetch --tags;
+          git checkout tags/${{ inputs.tag }};
+        env:
+          GITHUB_TOKEN: ${{ secrets.ARCTIR_GH_ACTIONS_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Generate the client
+        run: yarn build
+
+      - name: Build package
+        run: yarn tsc
+
+      - name: Update package version
+        run: |
+          git config --global user.email "gitbot@arctir.com";
+          git config --global user.name "Arctir Bot";
+          git add src spec;
+          git commit api package.json src yarn.lock spec -m "Tracking upstream API version ${{ inputs.tag }}";
+          npm version ${{ inputs.tag }};
+
+      - name: Publish package
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+          npm publish
+
+      - name: Push changes to git
+        run: | 
+          git push origin main --tags;

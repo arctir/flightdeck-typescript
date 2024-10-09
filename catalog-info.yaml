@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: arctir-typescript
+  description: Typescript bindings for the Arctir API 
+spec:
+  type: library
+  lifecycle: production
+  owner: arctir-core
+  system: arctir-runtime
+  dependsOn:
+    - api:default/arctir-api
+  subcomponentOf: component:default/dashboard
+  consumesApis:
+    - arctir-api
