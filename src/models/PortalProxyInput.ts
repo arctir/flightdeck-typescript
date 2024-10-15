@@ -8,7 +8,7 @@ import type { PortalProxyPathRewrite } from './PortalProxyPathRewrite';
 
 export type PortalProxyInput = {
     name: string;
-    endpoint?: string;
+    endpoint: string;
     target: string;
     httpHeaders?: Array<PortalProxyHeader>;
     pathRewrite?: Array<PortalProxyPathRewrite>;

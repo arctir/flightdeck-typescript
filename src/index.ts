@@ -69,7 +69,7 @@ export type { PluginConfigurationInput } from './models/PluginConfigurationInput
 export type { PluginConfigurationsListResponse } from './models/PluginConfigurationsListResponse';
 export type { PluginDefinition } from './models/PluginDefinition';
 export type { PluginDefinitionFrontendEntities } from './models/PluginDefinitionFrontendEntities';
-export type { PluginDefinitionFrontendEntity } from './models/PluginDefinitionFrontendEntity';
+export { PluginDefinitionFrontendEntity } from './models/PluginDefinitionFrontendEntity';
 export type { PluginDefinitionInput } from './models/PluginDefinitionInput';
 export type { PluginDefinitionsListResponse } from './models/PluginDefinitionsListResponse';
 export type { Portal } from './models/Portal';

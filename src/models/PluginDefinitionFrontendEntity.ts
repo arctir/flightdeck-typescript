@@ -4,9 +4,20 @@
 /* eslint-disable */
 
 export type PluginDefinitionFrontendEntity = {
-    id?: string;
+    id: string;
+    type: PluginDefinitionFrontendEntity.type;
     path: string;
     title: string;
     description: string;
 };
+
+export namespace PluginDefinitionFrontendEntity {
+
+    export enum type {
+        CARD = 'Card',
+        CONTENT = 'Content',
+    }
+
+
+}
 
