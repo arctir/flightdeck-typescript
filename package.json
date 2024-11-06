@@ -1,6 +1,6 @@
 {
   "name": "@arctir/flightdeck-typescript",
-  "version": "1.0.0-pre.3",
+  "version": "1.0.0-pre.4",
   "description": "A Typescript library for interacting with the Flightdeck API",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
