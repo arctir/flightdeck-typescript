@@ -10,12 +10,12 @@ export type PortalProxyInput = {
     name: string;
     endpoint: string;
     target: string;
-    httpHeaders?: Array<PortalProxyHeader>;
-    pathRewrite?: Array<PortalProxyPathRewrite>;
+    httpHeaders?: Array<PortalProxyHeader> | null;
+    pathRewrite?: Array<PortalProxyPathRewrite> | null;
     changeOrigin?: boolean;
-    allowedMethods?: Array<string>;
-    allowedHeaders?: Array<string>;
-    credentials?: PortalProxyInput.credentials;
+    allowedMethods?: Array<string> | null;
+    allowedHeaders?: Array<string> | null;
+    credentials: PortalProxyInput.credentials;
 };
 
 export namespace PortalProxyInput {

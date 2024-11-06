@@ -13,6 +13,9 @@ import type { ClustersListResponse } from '../models/ClustersListResponse';
 import type { Connection } from '../models/Connection';
 import type { ConnectionInput } from '../models/ConnectionInput';
 import type { ConnectionsListResponse } from '../models/ConnectionsListResponse';
+import type { EntityPageLayout } from '../models/EntityPageLayout';
+import type { EntityPageLayoutInput } from '../models/EntityPageLayoutInput';
+import type { EntityPageLayoutsListResponse } from '../models/EntityPageLayoutsListResponse';
 import type { IdentityProvider } from '../models/IdentityProvider';
 import type { IdentityProviderInput } from '../models/IdentityProviderInput';
 import type { IdentityProvidersListResponse } from '../models/IdentityProvidersListResponse';
@@ -25,9 +28,6 @@ import type { OrganizationsListResponse } from '../models/OrganizationsListRespo
 import type { PluginConfiguration } from '../models/PluginConfiguration';
 import type { PluginConfigurationInput } from '../models/PluginConfigurationInput';
 import type { PluginConfigurationsListResponse } from '../models/PluginConfigurationsListResponse';
-import type { PluginDefinition } from '../models/PluginDefinition';
-import type { PluginDefinitionInput } from '../models/PluginDefinitionInput';
-import type { PluginDefinitionsListResponse } from '../models/PluginDefinitionsListResponse';
 import type { Portal } from '../models/Portal';
 import type { PortalInput } from '../models/PortalInput';
 import type { PortalProxiesListResponse } from '../models/PortalProxiesListResponse';
@@ -348,141 +348,8 @@ export class DefaultService {
     }
 
     /**
-     * Retrieve a list of Plugin Definitions
-     * @param orgId The ID of the Organization
-     * @param limit Limit number of items
-     * @param prev The previous cursor
-     * @param next The next cursor
-     * @returns PluginDefinitionsListResponse A list of Plugin Definitions
-     * @throws ApiError
-     */
-    public getPluginDefinitions(
-        orgId: string,
-        limit?: number,
-        prev?: string,
-        next?: string,
-    ): CancelablePromise<PluginDefinitionsListResponse> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/orgs/{orgId}/plugindefinitions',
-            path: {
-                'orgId': orgId,
-            },
-            query: {
-                'limit': limit,
-                'prev': prev,
-                'next': next,
-            },
-        });
-    }
-
-    /**
-     * Create a new Plugin Definition
-     * @param orgId The ID of the Organization
-     * @param requestBody
-     * @returns PluginDefinition The newly created Plugin Definition
-     * @throws ApiError
-     */
-    public createPluginDefinition(
-        orgId: string,
-        requestBody: PluginDefinitionInput,
-    ): CancelablePromise<PluginDefinition> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/orgs/{orgId}/plugindefinitions',
-            path: {
-                'orgId': orgId,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-
-    /**
-     * Retrieve a Plugin Definition
-     * @param orgId The ID of the Organization
-     * @param name The name of the Plugin Definition
-     * @param version The version of the Plugin Definition
-     * @returns PluginDefinition The Plugin Definitions
-     * @throws ApiError
-     */
-    public getPluginDefinition(
-        orgId: string,
-        name: string,
-        version: number,
-    ): CancelablePromise<PluginDefinition> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/orgs/{orgId}/plugindefinitions/{name}/{version}',
-            path: {
-                'orgId': orgId,
-                'name': name,
-                'version': version,
-            },
-        });
-    }
-
-    /**
-     * Update Plugin Definition
-     * @param orgId The ID of the Organization
-     * @param name The name of the Plugin Definition
-     * @param version The version of the Plugin Definition
-     * @param requestBody
-     * @returns PluginDefinition The updated Plugin Definition
-     * @throws ApiError
-     */
-    public updatePluginDefinition(
-        orgId: string,
-        name: string,
-        version: number,
-        requestBody: PluginDefinitionInput,
-    ): CancelablePromise<PluginDefinition> {
-        return this.httpRequest.request({
-            method: 'PUT',
-            url: '/orgs/{orgId}/plugindefinitions/{name}/{version}',
-            path: {
-                'orgId': orgId,
-                'name': name,
-                'version': version,
-            },
-            body: requestBody,
-            mediaType: 'application/json',
-            errors: {
-                404: `The resource was not found`,
-            },
-        });
-    }
-
-    /**
-     * Delete Plugin Definition
-     * @param orgId The ID of the Organization
-     * @param name The name of the Plugin Definition
-     * @param version The version of the Plugin Definition
-     * @returns void
-     * @throws ApiError
-     */
-    public deletePluginDefinition(
-        orgId: string,
-        name: string,
-        version: number,
-    ): CancelablePromise<void> {
-        return this.httpRequest.request({
-            method: 'DELETE',
-            url: '/orgs/{orgId}/plugindefinitions/{name}/{version}',
-            path: {
-                'orgId': orgId,
-                'name': name,
-                'version': version,
-            },
-            errors: {
-                404: `The resource was not found`,
-            },
-        });
-    }
-
-    /**
      * Retrieve a list of tenants
-     * @param orgId The ID of the Organizzation
+     * @param orgId The ID of the Organization
      * @param limit Limit number of items
      * @param prev The previous cursor
      * @param next The next cursor
@@ -511,7 +378,7 @@ export class DefaultService {
 
     /**
      * Create a new tenant
-     * @param orgId The ID of the Organizzation
+     * @param orgId The ID of the Organization
      * @param requestBody
      * @returns Tenant The newly created tenant
      * @throws ApiError
@@ -1744,6 +1611,154 @@ export class DefaultService {
                 'orgId': orgId,
                 'portalName': portalName,
                 'providerName': providerName,
+            },
+            errors: {
+                404: `The resource was not found`,
+            },
+        });
+    }
+
+    /**
+     * Get a list of Entity Page Layouts
+     * @param orgId The ID of the Organization
+     * @param portalName The name of the portal
+     * @param limit Limit number of items
+     * @param prev The previous cursor
+     * @param next The next cursor
+     * @returns EntityPageLayoutsListResponse List of Entity Page Layouts
+     * @throws ApiError
+     */
+    public getEntityPageLayouts(
+        orgId: string,
+        portalName: string,
+        limit?: number,
+        prev?: string,
+        next?: string,
+    ): CancelablePromise<EntityPageLayoutsListResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/orgs/{orgId}/portals/{portalName}/entitypagelayouts',
+            path: {
+                'orgId': orgId,
+                'portalName': portalName,
+            },
+            query: {
+                'limit': limit,
+                'prev': prev,
+                'next': next,
+            },
+            errors: {
+                404: `The resource was not found`,
+            },
+        });
+    }
+
+    /**
+     * Create an Entity Page Layout
+     * @param orgId The ID of the Organization
+     * @param portalName The name of the portal
+     * @param requestBody
+     * @returns EntityPageLayout The Entity Page Layout was created
+     * @throws ApiError
+     */
+    public createEntityPageLayout(
+        orgId: string,
+        portalName: string,
+        requestBody: EntityPageLayoutInput,
+    ): CancelablePromise<EntityPageLayout> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/orgs/{orgId}/portals/{portalName}/entitypagelayouts',
+            path: {
+                'orgId': orgId,
+                'portalName': portalName,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                404: `The resource was not found`,
+            },
+        });
+    }
+
+    /**
+     * Get an Entity Page Layout
+     * @param orgId The ID of the org
+     * @param portalName The name of the portal
+     * @param name The name of the Entity Page Layout
+     * @returns EntityPageLayout The Entity Page Layout
+     * @throws ApiError
+     */
+    public getEntityPageLayout(
+        orgId: string,
+        portalName: string,
+        name: string,
+    ): CancelablePromise<EntityPageLayout> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/orgs/{orgId}/portals/{portalName}/entitypagelayouts/{name}',
+            path: {
+                'orgId': orgId,
+                'portalName': portalName,
+                'name': name,
+            },
+            errors: {
+                404: `The resource was not found`,
+            },
+        });
+    }
+
+    /**
+     * Update an Entity Page Layout
+     * @param orgId The ID of the org
+     * @param portalName The name of the portal
+     * @param name The name of the Entity Page Layout
+     * @param requestBody
+     * @returns EntityPageLayout The Entity Page Layout was updated
+     * @throws ApiError
+     */
+    public updateEntityPageLayout(
+        orgId: string,
+        portalName: string,
+        name: string,
+        requestBody: EntityPageLayoutInput,
+    ): CancelablePromise<EntityPageLayout> {
+        return this.httpRequest.request({
+            method: 'PUT',
+            url: '/orgs/{orgId}/portals/{portalName}/entitypagelayouts/{name}',
+            path: {
+                'orgId': orgId,
+                'portalName': portalName,
+                'name': name,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                404: `The resource was not found`,
+            },
+        });
+    }
+
+    /**
+     * Delete an Entity Page Layout
+     * @param orgId The ID of the org
+     * @param portalName The name of the portal
+     * @param name The name of the Entity Page Layout
+     * @returns void
+     * @throws ApiError
+     */
+    public deleteEntityPageLayout(
+        orgId: string,
+        portalName: string,
+        name: string,
+    ): CancelablePromise<void> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/orgs/{orgId}/portals/{portalName}/entitypagelayouts/{name}',
+            path: {
+                'orgId': orgId,
+                'portalName': portalName,
+                'name': name,
             },
             errors: {
                 404: `The resource was not found`,

@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type PluginConfigurationFrontendEntityConfig = {
+export type EntityPageContentSpec = {
     path: string;
-    enabled: boolean;
-    config?: Record<string, any>;
+    filters?: Array<string> | null;
+    config?: Record<string, any> | null;
 };
 

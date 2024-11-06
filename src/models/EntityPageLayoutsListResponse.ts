@@ -3,11 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { EntityPageLayout } from './EntityPageLayout';
 import type { PageInfo } from './PageInfo';
-import type { PluginDefinition } from './PluginDefinition';
 
-export type PluginDefinitionsListResponse = {
-    items?: Array<PluginDefinition>;
+export type EntityPageLayoutsListResponse = {
+    items?: Array<EntityPageLayout>;
     total: number;
     pageInfo: PageInfo;
 };

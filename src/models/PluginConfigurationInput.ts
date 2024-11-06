@@ -3,15 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { PluginConfigurationFrontendEntitiesConfig } from './PluginConfigurationFrontendEntitiesConfig';
+import type { PluginConfigurationDefinitionSpec } from './PluginConfigurationDefinitionSpec';
 
 export type PluginConfigurationInput = {
     enabled: boolean;
-    frontendEntityConfig?: PluginConfigurationFrontendEntitiesConfig;
-    configValue?: Record<string, any>;
-    definition: {
-        name: string;
-        version: number;
-    };
+    frontendConfig?: Record<string, any>;
+    backendConfig?: Record<string, any>;
+    definition: PluginConfigurationDefinitionSpec;
 };
 
