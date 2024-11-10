@@ -6,5 +6,8 @@
 import type { BaseResourceType } from './BaseResourceType';
 import type { PluginConfigurationInput } from './PluginConfigurationInput';
 
-export type PluginConfiguration = (BaseResourceType & PluginConfigurationInput);
+export type PluginConfiguration = (BaseResourceType & PluginConfigurationInput & {
+    organizationId: string;
+    portalName: string;
+});
 

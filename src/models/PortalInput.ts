@@ -8,7 +8,7 @@ export type PortalInput = {
     title: string;
     organizationName: string;
     domain: string;
-    version: string;
+    versionId: string;
     tenantName: string;
     alternateDomains: Array<string>;
 };

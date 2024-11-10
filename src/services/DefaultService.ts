@@ -28,6 +28,8 @@ import type { OrganizationsListResponse } from '../models/OrganizationsListRespo
 import type { PluginConfiguration } from '../models/PluginConfiguration';
 import type { PluginConfigurationInput } from '../models/PluginConfigurationInput';
 import type { PluginConfigurationsListResponse } from '../models/PluginConfigurationsListResponse';
+import type { PluginDefinition } from '../models/PluginDefinition';
+import type { PluginDefinitionsListResponse } from '../models/PluginDefinitionsListResponse';
 import type { Portal } from '../models/Portal';
 import type { PortalInput } from '../models/PortalInput';
 import type { PortalProxiesListResponse } from '../models/PortalProxiesListResponse';
@@ -35,6 +37,8 @@ import type { PortalProxy } from '../models/PortalProxy';
 import type { PortalProxyInput } from '../models/PortalProxyInput';
 import type { PortalsListResponse } from '../models/PortalsListResponse';
 import type { PortalStatus } from '../models/PortalStatus';
+import type { PortalVersion } from '../models/PortalVersion';
+import type { PortalVersionsListResponse } from '../models/PortalVersionsListResponse';
 import type { Tenant } from '../models/Tenant';
 import type { TenantInput } from '../models/TenantInput';
 import type { TenantsListResponse } from '../models/TenantsListResponse';
@@ -348,8 +352,100 @@ export class DefaultService {
     }
 
     /**
+     * Retrieve a list of PortalVersions
+     * @param limit Limit number of items
+     * @param prev The previous cursor
+     * @param next The next cursor
+     * @returns PortalVersionsListResponse A list of PortalVersions
+     * @throws ApiError
+     */
+    public getPortalVersions(
+        limit?: number,
+        prev?: string,
+        next?: string,
+    ): CancelablePromise<PortalVersionsListResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/versions',
+            query: {
+                'limit': limit,
+                'prev': prev,
+                'next': next,
+            },
+        });
+    }
+
+    /**
+     * Retrieve a PortalVersion
+     * @param versionId The version of the PortalVersion
+     * @returns PortalVersion The PortalVersion
+     * @throws ApiError
+     */
+    public getPortalVersion(
+        versionId: string,
+    ): CancelablePromise<PortalVersion> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/versions/{versionId}',
+            path: {
+                'versionId': versionId,
+            },
+        });
+    }
+
+    /**
+     * Retrieve a list of Plugin Definitions for a PortalVersion
+     * @param versionId The version of the PortalVersion
+     * @param limit Limit number of items
+     * @param prev The previous cursor
+     * @param next The next cursor
+     * @returns PluginDefinitionsListResponse A list of PortalVersion Plugin Definitions
+     * @throws ApiError
+     */
+    public getPortalVersionPluginDefinitions(
+        versionId: string,
+        limit?: number,
+        prev?: string,
+        next?: string,
+    ): CancelablePromise<PluginDefinitionsListResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/versions/{versionId}/plugindefinitions',
+            path: {
+                'versionId': versionId,
+            },
+            query: {
+                'limit': limit,
+                'prev': prev,
+                'next': next,
+            },
+        });
+    }
+
+    /**
+     * Retrieve a Plugin Definition
+     * @param versionId The version of the PortalVersion
+     * @param name The name of the Plugin Definition
+     * @returns PluginDefinition The PortalVersion Plugin Definition
+     * @throws ApiError
+     */
+    public getPortalVersionPluginDefinition(
+        versionId: string,
+        name: string,
+    ): CancelablePromise<PluginDefinition> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/versions/{versionId}/plugindefinitions/{name}',
+            path: {
+                'versionId': versionId,
+                'name': name,
+            },
+        });
+    }
+
+    /**
      * Retrieve a list of tenants
-     * @param orgId The ID of the Organization
+     * @param orgId The ID of the Organizzation
      * @param limit Limit number of items
      * @param prev The previous cursor
      * @param next The next cursor
@@ -378,7 +474,7 @@ export class DefaultService {
 
     /**
      * Create a new tenant
-     * @param orgId The ID of the Organization
+     * @param orgId The ID of the Organizzation
      * @param requestBody
      * @returns Tenant The newly created tenant
      * @throws ApiError
@@ -1685,7 +1781,7 @@ export class DefaultService {
      * Get an Entity Page Layout
      * @param orgId The ID of the org
      * @param portalName The name of the portal
-     * @param name The name of the Entity Page Layout
+     * @param name The name of the EntityPageLayout
      * @returns EntityPageLayout The Entity Page Layout
      * @throws ApiError
      */
@@ -1712,7 +1808,7 @@ export class DefaultService {
      * Update an Entity Page Layout
      * @param orgId The ID of the org
      * @param portalName The name of the portal
-     * @param name The name of the Entity Page Layout
+     * @param name The name of the EntityPageLayout
      * @param requestBody
      * @returns EntityPageLayout The Entity Page Layout was updated
      * @throws ApiError
@@ -1743,7 +1839,7 @@ export class DefaultService {
      * Delete an Entity Page Layout
      * @param orgId The ID of the org
      * @param portalName The name of the portal
-     * @param name The name of the Entity Page Layout
+     * @param name The name of the EntityPageLayout
      * @returns void
      * @throws ApiError
      */
