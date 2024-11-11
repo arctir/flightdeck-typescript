@@ -356,6 +356,7 @@ export class DefaultService {
      * @param limit Limit number of items
      * @param prev The previous cursor
      * @param next The next cursor
+     * @param versionName Search for a Version by name
      * @returns PortalVersionsListResponse A list of PortalVersions
      * @throws ApiError
      */
@@ -363,6 +364,7 @@ export class DefaultService {
         limit?: number,
         prev?: string,
         next?: string,
+        versionName?: string,
     ): CancelablePromise<PortalVersionsListResponse> {
         return this.httpRequest.request({
             method: 'GET',
@@ -371,6 +373,7 @@ export class DefaultService {
                 'limit': limit,
                 'prev': prev,
                 'next': next,
+                'versionName': versionName,
             },
         });
     }
