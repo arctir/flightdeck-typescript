@@ -4,6 +4,9 @@
 /* eslint-disable */
 
 export type ConnectionConfig = {
+    /**
+     * The type of the Flightdeck Connection configuration.
+     */
     configType: string;
 };
 

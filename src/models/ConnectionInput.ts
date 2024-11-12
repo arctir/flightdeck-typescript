@@ -6,7 +6,13 @@
 import type { TailscaleConnection } from './TailscaleConnection';
 
 export type ConnectionInput = {
+    /**
+     * The name of the Flightdeck Connection resource.
+     */
     name: string;
+    /**
+     * The configuration for the Flightdeck Connection.
+     */
     connectionConfig: TailscaleConnection;
 };
 
