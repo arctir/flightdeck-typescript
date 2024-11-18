@@ -6,5 +6,8 @@
 import type { GoogleIdentityProviderInput } from './GoogleIdentityProviderInput';
 import type { IdentityProviderConfig } from './IdentityProviderConfig';
 
+/**
+ * Represents a Google Identity Provider resource.
+ */
 export type GoogleIdentityProvider = (IdentityProviderConfig & GoogleIdentityProviderInput);
 

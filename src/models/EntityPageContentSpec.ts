@@ -4,8 +4,17 @@
 /* eslint-disable */
 
 export type EntityPageContentSpec = {
+    /**
+     * The unique Entity Page Extension path.
+     */
     path: string;
+    /**
+     * Named filters for this Entity Page Extension.
+     */
     filters?: Array<string> | null;
+    /**
+     * Configuration for the Entity Page Extension.
+     */
     config?: Record<string, any> | null;
 };
 

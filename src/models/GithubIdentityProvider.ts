@@ -6,5 +6,8 @@
 import type { GithubIdentityProviderInput } from './GithubIdentityProviderInput';
 import type { IdentityProviderConfig } from './IdentityProviderConfig';
 
+/**
+ * Represents a Github Identity Provider resource.
+ */
 export type GithubIdentityProvider = (IdentityProviderConfig & GithubIdentityProviderInput);
 

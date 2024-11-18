@@ -3,7 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * Represents an Integration configuration.
+ */
 export type IntegrationConfig = {
+    /**
+     * The type of integration configuration.
+     */
     configType: string;
 };
 

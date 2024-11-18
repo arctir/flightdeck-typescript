@@ -4,6 +4,9 @@
 /* eslint-disable */
 
 export type TaskScheduleDefinitionTimeConfigTimeout = {
+    /**
+     * The number of minutes before the task times out.
+     */
     minutes?: number;
 };
 

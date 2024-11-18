@@ -4,7 +4,13 @@
 /* eslint-disable */
 
 export type BaseResourceType = {
+    /**
+     * The ID of the Flightdeck resource.
+     */
     id: string;
+    /**
+     * The date and time of the resources creation.
+     */
     createdAt: string;
 };
 

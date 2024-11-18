@@ -6,5 +6,8 @@
 import type { GitlabIdentityProviderInput } from './GitlabIdentityProviderInput';
 import type { IdentityProviderConfig } from './IdentityProviderConfig';
 
+/**
+ * Represents a Gitlab Identity Provider resource.
+ */
 export type GitlabIdentityProvider = (IdentityProviderConfig & GitlabIdentityProviderInput);
 

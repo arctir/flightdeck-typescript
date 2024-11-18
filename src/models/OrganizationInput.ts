@@ -6,7 +6,13 @@
 import type { SubscriptionInfo } from './SubscriptionInfo';
 
 export type OrganizationInput = {
+    /**
+     * The name of the Flightdeck Organization.
+     */
     name: string;
+    /**
+     * The ID of the Flightdeck Cluster that manages this Organization.
+     */
     clusterId: string;
     subscription?: SubscriptionInfo;
 };

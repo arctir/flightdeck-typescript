@@ -4,6 +4,9 @@
 /* eslint-disable */
 
 export type CatalogProviderConfig = {
+    /**
+     * The type of the Flightdeck Catalog Provider configuration.
+     */
     configType: string;
 };
 

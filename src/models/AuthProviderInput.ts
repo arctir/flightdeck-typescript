@@ -8,6 +8,9 @@ import type { GitlabAuthProvider } from './GitlabAuthProvider';
 import type { GoogleAuthProvider } from './GoogleAuthProvider';
 
 export type AuthProviderInput = {
+    /**
+     * The name of the Auth Provider resource.
+     */
     name: string;
     providerConfig: (GithubAuthProvider | GitlabAuthProvider | GoogleAuthProvider);
 };

@@ -6,5 +6,9 @@
 import type { AuthProviderConfig } from './AuthProviderConfig';
 import type { GitlabAuthProviderInput } from './GitlabAuthProviderInput';
 
+/**
+ * Represents the configuration for a Gitlab OAuth2 provider.
+ *
+ */
 export type GitlabAuthProvider = (AuthProviderConfig & GitlabAuthProviderInput);
 
